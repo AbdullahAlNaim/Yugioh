@@ -1,0 +1,1 @@
+This application pulls data from an open trading card game API and allows users to search for specific cards by name, type, or other attributes. The app provides detailed information about each card, including its description, image, and price, offering a comprehensive tool for trading card enthusiasts.
