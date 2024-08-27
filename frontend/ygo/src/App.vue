@@ -4,8 +4,15 @@
 
 <template>
   <h1>YU-GI-OH</h1>
-  <searcher></searcher>
-  <card></card>
+
+  <section id="deck-section">
+
+  </section>
+
+  <section class="search-section">
+    <searcher></searcher>
+  </section>
+
 </template>
 
 <style scoped>
