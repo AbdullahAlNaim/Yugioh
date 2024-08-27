@@ -9,4 +9,4 @@ const app = createApp(App)
 app.component('card', Card);
 app.component('searcher', Searcher);
 
-app.mount('#app')
+app.mount('#app');

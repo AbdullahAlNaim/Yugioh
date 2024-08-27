@@ -7,11 +7,11 @@ export default {
     }
   },
   methods: {
-    randomizer() {
-      return Math.floor(Math.random() * 13308);
+    randomizer(max) {
+      return Math.floor(Math.random() * max);
     },
-    async getData(num) {
-      num = this.randomizer()
+    async getData() {
+      // num = this.randomizer()
       const url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
       try {
         const response = await fetch(url);
@@ -20,20 +20,27 @@ export default {
         }
 
         const json = await response.json();
-        this.cardImg = json.data[num].card_images[0].image_url;
-        console.log(num);
-        for (let x = 0; x < 10; x++)
+        const totalCards = json.data.length;
+
+        this.cardList = [];
+
+        // this.cardImg = json.data[num].card_images[0].image_url;
+
+        // console.log(num);
+        for (let x = 0; x < 20; x++)
         {
-          this.cardList.push(json.data[x].card_images[0].image_url);
+          const randomIndex = this.randomizer(totalCards);
+          this.cardList.push(json.data[randomIndex].card_images[0].image_url);
         }
         console.log(this.cardList)
+        // console.log(this.randomizer())
       } catch (error) {
         console.error(error.message);
       }
     }
   },
   mounted() {
-    this.getData(this.randomizer);
+    this.getData();
   }
 }
 
@@ -43,8 +50,12 @@ export default {
   
   <main>
     <section>
-
-      <img :src="cardImg" alt="Yu-Gi-Oh card image" v-if="cardImg" />
+      <!-- <img :src="cardImg" alt="Yu-Gi-Oh card image" v-if="cardImg" /> -->
+    </section>
+    <section>
+      <ul>
+        <img v-for="card in cardList" :src="card"/>
+      </ul>
     </section>
   </main>  
 </template>
