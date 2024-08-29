@@ -4,6 +4,8 @@ export default {
     return {
       cardImg: "",
       cardList: [],
+      results: [],
+      deckList: [],
     }
   },
   methods: {
