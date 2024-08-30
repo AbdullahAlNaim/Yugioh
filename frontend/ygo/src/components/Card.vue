@@ -5,6 +5,7 @@ export default {
       cardImg: "",
       cardList: [],
       results: [],
+      detailImg: "",
       deckList: [],
     }
   },
@@ -12,9 +13,16 @@ export default {
     randomizer(max) {
       return Math.floor(Math.random() * max);
     },
+    details(card) {
+      this.detailImg = card.cardImg;
+      this.$emit('found', this.detailImg);
+    },
+    recieveEmit(search) {
+      console.log('cards got your message');
+      this.cardSearch(search);
+    },
     async getData() {
-      // num = this.randomizer()
-      const url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
+      const url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?"
       try {
         const response = await fetch(url);
         if(!response.ok) {
@@ -26,16 +34,37 @@ export default {
 
         this.cardList = [];
 
-        // this.cardImg = json.data[num].card_images[0].image_url;
-
-        // console.log(num);
         for (let x = 0; x < 20; x++)
         {
           const randomIndex = this.randomizer(totalCards);
-          this.cardList.push(json.data[randomIndex].card_images[0].image_url);
+          const cardImg = json.data[randomIndex].card_images[0].image_url
+          const cardId = json.data[randomIndex].id
+          this.cardList.push({cardImg, cardId});
+          this.results.push[cardId]
         }
-        console.log(this.cardList)
-        // console.log(this.randomizer())
+      } catch (error) {
+        console.error(error.message);
+      }
+    },
+    async cardSearch(looking) {
+      const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${looking}`;
+      try {
+        const response = await fetch(url);
+        if(!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json();
+        const totalCards = json.data.length;
+
+        this.cardList = [];
+
+        for(let x = 0; x < totalCards.length; x++) {
+          const cardImg = json.data[x].card_images[0].image_url;
+          const cardId = json.data[x].id;
+          this.cardList.push({cardImg, cardId});
+          this.results.push[cardId];
+        }
       } catch (error) {
         console.error(error.message);
       }
@@ -49,34 +78,47 @@ export default {
 </script>
 
 <template>
-  
   <main>
-    <section>
-      <!-- <img :src="cardImg" alt="Yu-Gi-Oh card image" v-if="cardImg" /> -->
-    </section>
-    <section>
-      <ul>
-        <img v-for="card in cardList" :src="card"/>
+    <section class="result-section">
+      <ul class="ul-card-list">
+        <li v-for="card in cardList" :key="card.cardId" class="card-holder">
+          <img  
+          :src="card.cardImg" 
+          @click="details(card)"
+          class="single-card" />
+        </li>
       </ul>
     </section>
-  </main>  
+  </main>
+
 </template>
 
 <style scoped>
-
-
 main {
-  /* margin: auto; */
-  width: 80%;
-}
-section {
   margin: auto;
-  display: flex;
-  /* justify-content: space-between; */
 }
 
-section img {
-  width: 20%;
+.result-section {
+  width: 100%;
+  margin: 20px;
+}
+
+.result-section ul {
+  margin: center;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.ul-card-list {
+  padding: 0; 
+  width: 100%;
+}
+
+.single-card {
+  width: 70px;
+  /* display: block; */
 }
 </style>
 

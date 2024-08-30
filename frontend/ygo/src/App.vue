@@ -1,12 +1,25 @@
-<script setup>
-
+<script>
+export default {
+  data() {
+    return {
+      cardDetail: "",
+    }
+  },
+  methods: {
+    recieveEmit(detailImg) {
+      console.log('got your message', detailImg)
+      this.cardDetail = detailImg
+    }
+  }
+}
 </script>
 
 <template>
   <h1>YU-GI-OH</h1>
   <main>
     <section class="single-card spacer">
-      <img data-v-c6c3362a="" src="https://images.ygoprodeck.com/images/cards/5373478.jpg">
+      <img data-v-c6c3362a="" :src="cardDetail"
+      >
     </section>
 
     <section class="deck-build spacer">
@@ -15,7 +28,7 @@
 
     <section class="search-section spacer">
       <searcher @search="searchByCardName"></searcher>
-      <card></card>
+      <card @found="recieveEmit"></card>
     </section>
   </main>
   
@@ -56,6 +69,7 @@ main {
 .search-section {
   width: 25%;
   /* background-color: yellow; */
+  margin:
 }
 
 </style>
