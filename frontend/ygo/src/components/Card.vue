@@ -7,6 +7,7 @@ export default {
       results: [],
       detailImg: "",
       deckList: [],
+      receivedCard: "",
     }
   },
   methods: {
@@ -21,33 +22,33 @@ export default {
       console.log('cards got your message');
       this.cardSearch(search);
     },
-    async getData() {
-      const url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?"
-      try {
-        const response = await fetch(url);
-        if(!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
-        }
+    // async getData() {
+    //   const url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?"
+    //   try {
+    //     const response = await fetch(url);
+    //     if(!response.ok) {
+    //       throw new Error(`Response status: ${response.status}`);
+    //     }
 
-        const json = await response.json();
-        const totalCards = json.data.length;
+    //     const json = await response.json();
+    //     const totalCards = json.data.length;
 
-        this.cardList = [];
+    //     this.cardList = [];
 
-        for (let x = 0; x < 20; x++)
-        {
-          const randomIndex = this.randomizer(totalCards);
-          const cardImg = json.data[randomIndex].card_images[0].image_url
-          const cardId = json.data[randomIndex].id
-          this.cardList.push({cardImg, cardId});
-          this.results.push[cardId]
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
-    },
+    //     for (let x = 0; x < 20; x++)
+    //     {
+    //       const randomIndex = this.randomizer(totalCards);
+    //       const cardImg = json.data[randomIndex].card_images[0].image_url
+    //       const cardId = json.data[randomIndex].id
+    //       this.cardList.push({cardImg, cardId});
+    //       this.results.push[cardId]
+    //     }
+    //   } catch (error) {
+    //     console.error(error.message);
+    //   }
+    // },
     async cardSearch(looking) {
-      const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${looking}`;
+      const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php?&fname=${looking}`;
       try {
         const response = await fetch(url);
         if(!response.ok) {
@@ -56,10 +57,10 @@ export default {
 
         const json = await response.json();
         const totalCards = json.data.length;
-
         this.cardList = [];
 
-        for(let x = 0; x < totalCards.length; x++) {
+        for(let x = 0; x < totalCards; x++) 
+        {
           const cardImg = json.data[x].card_images[0].image_url;
           const cardId = json.data[x].id;
           this.cardList.push({cardImg, cardId});
@@ -68,16 +69,22 @@ export default {
       } catch (error) {
         console.error(error.message);
       }
+    },
+    searchByCardName(searching) {
+      this.receivedCard = searching;
+      this.cardSearch(searching);
     }
   },
   mounted() {
-    this.getData();
+    // this.getData();
+    // this.cardSearch();
   }
 }
 
 </script>
 
 <template>
+  <searcher @search="searchByCardName"></searcher>
   <main>
     <section class="result-section">
       <ul class="ul-card-list">

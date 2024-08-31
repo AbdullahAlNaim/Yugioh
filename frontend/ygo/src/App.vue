@@ -9,7 +9,8 @@ export default {
     recieveEmit(detailImg) {
       console.log('got your message', detailImg)
       this.cardDetail = detailImg
-    }
+    },
+
   }
 }
 </script>
@@ -27,8 +28,9 @@ export default {
     </section>
 
     <section class="search-section spacer">
-      <searcher @search="searchByCardName"></searcher>
+      
       <card @found="recieveEmit"></card>
+       <!-- <card></card> -->
     </section>
   </main>
   
