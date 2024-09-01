@@ -2,17 +2,20 @@
 export default {
   data() {
     return {
-      cardImg: "",
-      cardList: [],
+      cardImg: "", // loading card img
+      cardList: [], //  results for searching on right
+      results: [], // holds cardID
+      deckList: [], //  send deck to parent
+      receivedCard: "", //  got from search 
+      total: 0, //  
     }
   },
   methods: {
-    randomizer(max) {
-      return Math.floor(Math.random() * max);
+    recieveEmit(search) {
+      this.cardSearch(search);
     },
-    async getData() {
-      // num = this.randomizer()
-      const url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
+    async cardSearch(looking) {
+      const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php?&fname=${looking}`;
       try {
         const response = await fetch(url);
         if(!response.ok) {
@@ -29,19 +32,57 @@ export default {
         // console.log(num);
         for (let x = 0; x < 20; x++)
         {
-          const randomIndex = this.randomizer(totalCards);
-          this.cardList.push(json.data[randomIndex].card_images[0].image_url);
+          const cardImg = json.data[x].card_images[0].image_url;
+          const cardId = json.data[x].id;
+
+          const cardMarketPrice = json.data[x].card_prices[0].cardmarket_price;
+          const tcgPlayerPrice = json.data[x].card_prices[0].tcgplayer_price;
+          const ebayPrice = json.data[x].card_prices[0].ebay_price;
+          const amazonPrice = json.data[x].card_prices[0].amazon_price;
+          const coolStuffIncPrice = json.data[x].card_prices[0].coolStuffinc_price;
+
+          this.cardList.push({
+            cardImg, 
+            cardId, 
+            cardMarketPrice, 
+            tcgPlayerPrice, 
+            ebayPrice, 
+            amazonPrice, 
+            coolStuffIncPrice
+          });
+          this.results.push[cardId];
         }
         console.log(this.cardList)
         // console.log(this.randomizer())
       } catch (error) {
         console.error(error.message);
       }
-    }
+    },
+    searchByCardName(searching) {
+      this.receivedCard = searching;
+      this.cardSearch(searching);
+    },
+    addToDeck(card) {
+      const cardId = card.cardId;
+      const cardImg = card.cardImg;
+      const cardMarketPrice = card.cardMarketPrice;
+      const tcgPlayerPrice = card.tcgplayerPrice;
+      const ebayPrice = card.ebayPrice;
+      const amazonPrice = card.amazonPrice;
+      const coolStuffIncPrice = card.coolstuffIncPrice;
+
+      this.deckList.push({cardImg, cardId, cardMarketPrice, tcgPlayerPrice, ebayPrice, amazonPrice, coolStuffIncPrice});
+     
+      this.$emit('full-deck', this.deckList);
+
+      this.deckList = [];
+    },
+    // FOCUS
+    details(card) { 
+      this.$emit('found', card);
+    },
   },
-  mounted() {
-    this.getData();
-  }
+  emits: ['found', 'full-deck'],
 }
 
 </script>
@@ -57,7 +98,7 @@ export default {
         <img v-for="card in cardList" :src="card"/>
       </ul>
     </section>
-  </main>  
+  </main>
 </template>
 
 <style scoped>
