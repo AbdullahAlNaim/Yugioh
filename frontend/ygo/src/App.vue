@@ -3,14 +3,17 @@ export default {
   data() {
     return {
       cardDetail: "",
+      deckList: [],
     }
   },
   methods: {
-    recieveEmit(detailImg) {
-      console.log('got your message', detailImg)
+    receiveImg(detailImg) {
       this.cardDetail = detailImg
     },
-
+    receiveDeck(deckList) {
+      this.deckList.push(deckList[0]);
+      // console.log(this.deckList.length, this.deckList);
+    },
   }
 }
 </script>
@@ -19,18 +22,15 @@ export default {
   <h1>YU-GI-OH</h1>
   <main>
     <section class="single-card spacer">
-      <img data-v-c6c3362a="" :src="cardDetail"
-      >
+      <img :src="cardDetail">
     </section>
 
     <section class="deck-build spacer">
-
+      <card-result :decklist="deckList" @found="receiveImg"></card-result>
     </section>
 
-    <section class="search-section spacer">
-      
-      <card @found="recieveEmit"></card>
-       <!-- <card></card> -->
+    <section class="search-section spacer">   
+      <card @found="receiveImg" @full-deck="receiveDeck"></card>
     </section>
   </main>
   
@@ -55,7 +55,6 @@ main {
 
 .single-card {
   width: 25%;
-  /* background-color: green; */
 }
 
 .single-card img {
@@ -65,13 +64,10 @@ main {
 .deck-build {
   width: 40%;
   height: 600px;
-  /* background-color: rgba(226, 226, 226, 0.5); */
 }
 
 .search-section {
   width: 25%;
-  /* background-color: yellow; */
-  margin:
 }
 
 </style>

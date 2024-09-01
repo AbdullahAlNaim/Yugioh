@@ -2,51 +2,32 @@
 export default {
   data() {
     return {
-      cardImg: "",
-      cardList: [],
-      results: [],
-      detailImg: "",
-      deckList: [],
-      receivedCard: "",
+      cardImg: "", // loading card img
+      cardList: [], // results for searching on right
+      results: [], // holds cardID
+      detailImg: "",  // send img to parent
+      deckList: [], // send deck to parent
+      receivedCard: "", //  got from search 
     }
   },
   methods: {
-    randomizer(max) {
-      return Math.floor(Math.random() * max);
+    addToDeck(card) {
+      const cardId = card.cardId;
+      const cardImg = card.cardImg;
+      const cardPrices = card.cardPrices;
+
+      this.deckList.push({cardImg, cardId, cardPrices});
+      this.$emit('full-deck', this.deckList);
+
+      this.deckList = [];
     },
     details(card) {
       this.detailImg = card.cardImg;
       this.$emit('found', this.detailImg);
     },
     recieveEmit(search) {
-      console.log('cards got your message');
       this.cardSearch(search);
     },
-    // async getData() {
-    //   const url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?"
-    //   try {
-    //     const response = await fetch(url);
-    //     if(!response.ok) {
-    //       throw new Error(`Response status: ${response.status}`);
-    //     }
-
-    //     const json = await response.json();
-    //     const totalCards = json.data.length;
-
-    //     this.cardList = [];
-
-    //     for (let x = 0; x < 20; x++)
-    //     {
-    //       const randomIndex = this.randomizer(totalCards);
-    //       const cardImg = json.data[randomIndex].card_images[0].image_url
-    //       const cardId = json.data[randomIndex].id
-    //       this.cardList.push({cardImg, cardId});
-    //       this.results.push[cardId]
-    //     }
-    //   } catch (error) {
-    //     console.error(error.message);
-    //   }
-    // },
     async cardSearch(looking) {
       const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php?&fname=${looking}`;
       try {
@@ -63,7 +44,8 @@ export default {
         {
           const cardImg = json.data[x].card_images[0].image_url;
           const cardId = json.data[x].id;
-          this.cardList.push({cardImg, cardId});
+          const cardPrices = json.data[x].card_prices
+          this.cardList.push({cardImg, cardId, cardPrices});
           this.results.push[cardId];
         }
       } catch (error) {
@@ -75,10 +57,6 @@ export default {
       this.cardSearch(searching);
     }
   },
-  mounted() {
-    // this.getData();
-    // this.cardSearch();
-  }
 }
 
 </script>
@@ -92,6 +70,7 @@ export default {
           <img  
           :src="card.cardImg" 
           @click="details(card)"
+          @dblclick="addToDeck(card)"
           class="single-card" />
         </li>
       </ul>
