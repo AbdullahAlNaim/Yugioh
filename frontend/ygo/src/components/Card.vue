@@ -7,7 +7,6 @@ export default {
       results: [], // holds cardID
       deckList: [], //  send deck to parent
       receivedCard: "", //  got from search 
-      total: 0, //  
     }
   },
   methods: {
@@ -71,7 +70,6 @@ export default {
 
       this.deckList = [];
     },
-    // FOCUS
     details(card) { 
       this.$emit('found', card);
     },
@@ -123,7 +121,6 @@ main {
 
 .single-card {
   width: 70px;
-  /* display: block; */
 }
 </style>
 

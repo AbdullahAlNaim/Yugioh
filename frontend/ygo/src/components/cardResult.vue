@@ -7,11 +7,9 @@ export default {
     }
   },
   methods: {
-    // FOCUS
     details(card) {
       this.cardImg = card.cardImg;
       this.cardMarketPrice = card.cardMarketPrice;
-      // console.log(this.cardImg, this.cardMarketPrice);
       this.$emit('found', this.cardImg, this.cardMarketPrice);
     },
     deckTotal() {
@@ -61,9 +59,6 @@ export default {
 <style scoped>
 main {
   margin: auto;
-}
-
-.result-section ul {
 }
 
 #total-list {
