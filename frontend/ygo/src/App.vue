@@ -18,14 +18,19 @@ export default {
     }
   },
   methods: {
+    cardFloatFix(price) {
+      const num = parseFloat(card.price);
+      return num.toFixed(2);
+    },
     receiveCard(card) {
       this.cardImg = card.cardImg
+      // this.cardMarketPrice = this.cardFloatFix(card.cardMarketPrice);
       this.cardMarketPrice = parseFloat(card.cardMarketPrice);
-      this.tcgPlayerPrice = parseFloat(card.tcgplayerPrice);
+      this.tcgPlayerPrice = parseFloat(card.tcgPlayerPrice);
       this.ebayPrice = parseFloat(card.ebayPrice);
       this.amazonPrice = parseFloat(card.amazonPrice);
-      this.coolStuffIncPrice = parseFloat(card.coolstuffIncPrice);
-      console.log(card);
+      this.coolStuffIncPrice = parseFloat(card.coolStuffIncPrice);
+      console.log("coolstuffinc price:", card.coolStuffIncPrice);
     },
     receiveDeck(deckList) {
       this.deckList.push(deckList[0]);
@@ -59,7 +64,6 @@ export default {
   <h1>YU-GI-OH</h1>
   <main>
     <section class="single-card spacer">
-      <img :src="cardImg">
       <ul id="total-list">
         <li class="totals">
           <h6>Card Market</h6>
@@ -82,6 +86,8 @@ export default {
           $ {{ coolStuffIncPrice }}
         </li>
       </ul>
+      <img :src="cardImg">
+      
     </section>
 
     <section class="deck-build spacer">
@@ -132,6 +138,11 @@ h6 {
   border-radius: 4px;;
 }
 
+
+.result-section {
+
+}
+
 .spacer {
   margin: 5px;
   border: solid white 1px;
@@ -139,20 +150,22 @@ h6 {
 }
 
 .single-card {
-  width: 25%;
+  width: 300px;
+  height: 600px;
 }
 
 .single-card img {
-  width: 100%;
+  width: 300px;
 }
 
 .deck-build {
-  width: 40%;
+  width: 600px;
   height: 600px;
 }
 
 .search-section {
-  width: 25%;
+  width: 400px;
+  height: 600px;
 }
 
 </style>

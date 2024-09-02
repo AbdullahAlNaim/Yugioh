@@ -29,23 +29,23 @@ export default {
       <ul id="total-list">
         <li class="totals">
           <h6>Card Market</h6>
-          $ {{ totalCardMarket }}
+          $ {{ totalCardMarket.toFixed(2) }}
         </li>
         <li class="totals">
           <h6>TcgPlayer</h6>
-          $ {{ totalTcgPlayer }}
+          $ {{ totalTcgPlayer.toFixed(2) }}
         </li>
         <li class="totals">
           <h6>Ebay</h6>
-          $ {{ totalEbay }}
+          $ {{ totalEbay.toFixed(2) }}
         </li>
         <li class="totals">
           <h6>Amazon</h6>
-          $ {{ totalAmazon }}
+          $ {{ totalAmazon.toFixed(2) }}
         </li>
         <li class="totals">
           <h6>Cool Stuff Inc</h6>
-          $ {{ totalCoolStuffInc }}
+          $ {{ totalCoolStuffInc.toFixed(2) }}
         </li>
       </ul>
 
@@ -68,6 +68,8 @@ main {
 
 #total-list {
   padding: 0;
+  margin: auto;
+  justify-content: space-between;
 }
 
 .totals {
@@ -75,6 +77,7 @@ main {
   margin: 2px;
   padding: 3px;
   border-radius: 4px;;
+  width:100px;
 }
 
 h6 {

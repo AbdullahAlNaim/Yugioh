@@ -35,7 +35,7 @@ export default {
           const tcgPlayerPrice = json.data[x].card_prices[0].tcgplayer_price;
           const ebayPrice = json.data[x].card_prices[0].ebay_price;
           const amazonPrice = json.data[x].card_prices[0].amazon_price;
-          const coolStuffIncPrice = json.data[x].card_prices[0].coolStuffinc_price;
+          const coolStuffIncPrice = json.data[x].card_prices[0].coolstuffinc_price;
 
           this.cardList.push({
             cardImg, 
@@ -60,10 +60,10 @@ export default {
       const cardId = card.cardId;
       const cardImg = card.cardImg;
       const cardMarketPrice = card.cardMarketPrice;
-      const tcgPlayerPrice = card.tcgplayerPrice;
+      const tcgPlayerPrice = card.tcgPlayerPrice;
       const ebayPrice = card.ebayPrice;
       const amazonPrice = card.amazonPrice;
-      const coolStuffIncPrice = card.coolstuffIncPrice;
+      const coolStuffIncPrice = card.coolStuffIncPrice;
 
       this.deckList.push({cardImg, cardId, cardMarketPrice, tcgPlayerPrice, ebayPrice, amazonPrice, coolStuffIncPrice});
      
