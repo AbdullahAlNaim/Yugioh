@@ -18,19 +18,13 @@ export default {
     }
   },
   methods: {
-    cardFloatFix(price) {
-      const num = parseFloat(card.price);
-      return num.toFixed(2);
-    },
     receiveCard(card) {
       this.cardImg = card.cardImg
-      // this.cardMarketPrice = this.cardFloatFix(card.cardMarketPrice);
       this.cardMarketPrice = parseFloat(card.cardMarketPrice);
       this.tcgPlayerPrice = parseFloat(card.tcgPlayerPrice);
       this.ebayPrice = parseFloat(card.ebayPrice);
       this.amazonPrice = parseFloat(card.amazonPrice);
       this.coolStuffIncPrice = parseFloat(card.coolStuffIncPrice);
-      console.log("coolstuffinc price:", card.coolStuffIncPrice);
     },
     receiveDeck(deckList) {
       this.deckList.push(deckList[0]);
@@ -47,15 +41,8 @@ export default {
         this.amazonTotal, 
         this.coolStuffIncTotal);
     },
-    deckTotal() {
-      // console.log(this.deckList);
-      for(let x = 0; x < this.deckList.length; x++) {
-        console.log(deckList[x].cardMarketPrice);
-      }
-    }
   },
   mounted() {
-    this.deckTotal();
   }
 }
 </script>
@@ -64,29 +51,26 @@ export default {
   <h1>YU-GI-OH</h1>
   <main>
     <section class="single-card spacer">
+      <div class="img-placeholder">
+        <img :src="cardImg">
+      </div>
       <ul id="total-list">
         <li class="totals">
-          <h6>Card Market</h6>
-          $ {{ cardMarketPrice }}
+          <p><span>Card Market:</span> <span>$ {{ cardMarketPrice }} </span></p>
         </li>
         <li class="totals">
-          <h6>TcgPlayer</h6>
-          $ {{ tcgPlayerPrice }}
+          <p><span>TcgPlayer:</span> <span>$ {{ tcgPlayerPrice }}</span></p>
         </li>
         <li class="totals">
-          <h6>Ebay</h6>
-          $ {{ ebayPrice }}
+          <p><span>Ebay:</span> <span>$ {{ ebayPrice }}</span></p>
         </li>
         <li class="totals">
-          <h6>Amazon</h6>
-          $ {{ amazonPrice }}
+          <p><span>Amazon:</span> <span>$ {{ amazonPrice }} </span></p>
         </li>
         <li class="totals">
-          <h6>Cool Stuff Inc</h6>
-          $ {{ coolStuffIncPrice }}
+          <p><span>Cool Stuff Inc:</span> <span>$ {{ coolStuffIncPrice }}</span> </p>
         </li>
       </ul>
-      <img :src="cardImg">
       
     </section>
 
@@ -121,26 +105,25 @@ main {
   justify-content: center;
 }
 
+.img-placeholder {
+  width: 300px;
+  height: 430px;
+}
+
 #total-list {
   padding: 0;
   list-style: none;
+}
+
+.totals p {
+  margin: 5px;
+  text-align: center;
   display: flex;
+  justify-content: space-between;
 }
 
 h6 {
   margin: 0;
-}
-
-.totals {
-  border: solid white 1px;
-  margin: 2px;
-  padding: 3px;
-  border-radius: 4px;;
-}
-
-
-.result-section {
-
 }
 
 .spacer {
