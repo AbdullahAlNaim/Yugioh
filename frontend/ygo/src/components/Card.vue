@@ -99,28 +99,46 @@ export default {
 <style scoped>
 main {
   margin: auto;
+  width: 300px;
 }
 
 .result-section {
-  width: 100%;
-  margin: 20px;
+  /* margin: 0px; */
 }
 
 .result-section ul {
-  margin: center;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  width: 310px;
+  padding: 10px;
+}
+
+.card-holder {
+  /* margin: 3px; */
+  height: 100px;
+  /* padding: 5px; */
+  /* background-color: red; */
 }
 
 .ul-card-list {
-  padding: 0; 
-  width: 100%;
+  /* padding: 10px;  */
+  overflow: auto;
+  height: 500px;
+  width: 100px;
+  padding: 0;
+  margin: 0;
+  /* background-color: yellow; */
 }
 
 .single-card {
   width: 70px;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.single-card:hover {
+  transform: scale(1.2);
 }
 </style>
 

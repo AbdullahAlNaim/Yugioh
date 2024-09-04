@@ -3,20 +3,18 @@ export default {
   data() {
     return {
       cardImg: "", 
-      cardMarketPrice: 0,
     }
   },
   methods: {
     details(card) {
-      this.cardImg = card.cardImg;
-      this.cardMarketPrice = card.cardMarketPrice;
-      this.$emit('found', this.cardImg, this.cardMarketPrice);
+      this.$emit('found', card);
     },
-    deckTotal() {
-      console.log(this.decklist);
-    },
+    removeFromDeck(index) {
+      this.$emit('removeItem', index);
+      console.log('clicked deck')
+    }
   },
-  emits: ['found'],
+  emits: ['found', 'remove'],
   props: ['decklist', 'totalCardMarket', 'totalTcgPlayer', 'totalEbay', 'totalAmazon', 'totalCoolStuffInc']
 }
 </script>
@@ -48,8 +46,10 @@ export default {
       </ul>
 
       <ul class="ul-card-list">
-        <li v-for="card in decklist" class="card-holder">
-          <img :src="card.cardImg" @click="details(card)" class="single-card">
+        <li v-for="(card, index) in decklist" class="card-holder">
+          <img :src="card.cardImg" @click="details(card)" 
+          @dbclick="removeFromDeck(index)"
+          class="single-card">
         </li>
       </ul>
     </section>
@@ -73,6 +73,7 @@ main {
   padding: 3px;
   border-radius: 4px;;
   width:100px;
+  text-align: center;
 }
 
 h6 {
@@ -99,5 +100,11 @@ h6 {
 
 .single-card {
   width: 70px;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.single-card:hover {
+  transform: scale(1.2);
 }
 </style>

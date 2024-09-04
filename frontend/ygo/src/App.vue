@@ -33,14 +33,11 @@ export default {
       this.ebayTotal += parseFloat(this.deckList[this.deckList.length - 1].ebayPrice);
       this.amazonTotal += parseFloat(this.deckList[this.deckList.length - 1].amazonPrice);
       this.coolStuffIncTotal += parseFloat(this.deckList[this.deckList.length - 1].coolStuffIncPrice);
-
-      console.log("cardMarket total: ", 
-        this.cardMarketTotal, 
-        this.tcgPlayerTotal, 
-        this.ebayTotal, 
-        this.amazonTotal, 
-        this.coolStuffIncTotal);
     },
+    removeCard(index) {
+      this.deckList.splice(index, 1);
+      console.log('got remove request')
+    }
   },
   mounted() {
   }
@@ -56,7 +53,7 @@ export default {
       </div>
       <ul id="total-list">
         <li class="totals">
-          <p><span>Card Market:</span> <span>$ {{ cardMarketPrice }} </span></p>
+          <p><span>Card Market:</span> <span>$ {{ cardMarketPrice }}</span></p>
         </li>
         <li class="totals">
           <p><span>TcgPlayer:</span> <span>$ {{ tcgPlayerPrice }}</span></p>
@@ -83,6 +80,7 @@ export default {
       :totalAmazon="amazonTotal"
       :totalCoolStuffInc="coolStuffIncTotal"
       @found="receiveCard"
+      @removeItem="removeCard"
       >
       </card-result>
     </section>
