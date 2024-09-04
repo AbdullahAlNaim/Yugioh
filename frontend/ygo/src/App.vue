@@ -34,9 +34,8 @@ export default {
       this.amazonTotal += parseFloat(this.deckList[this.deckList.length - 1].amazonPrice);
       this.coolStuffIncTotal += parseFloat(this.deckList[this.deckList.length - 1].coolStuffIncPrice);
     },
-    removeCard(index) {
-      this.deckList.splice(index, 1);
-      console.log('got remove request')
+    removeCard(card) {
+      this.deckList.splice(card, 1);
     }
   },
   mounted() {

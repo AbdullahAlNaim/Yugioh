@@ -9,12 +9,12 @@ export default {
     details(card) {
       this.$emit('found', card);
     },
-    removeFromDeck(index) {
-      this.$emit('removeItem', index);
+    removeFromDeck(card) {
+      this.$emit('removeItem', card);
       console.log('clicked deck')
     }
   },
-  emits: ['found', 'remove'],
+  emits: ['found', 'removeItem'],
   props: ['decklist', 'totalCardMarket', 'totalTcgPlayer', 'totalEbay', 'totalAmazon', 'totalCoolStuffInc']
 }
 </script>
@@ -46,9 +46,9 @@ export default {
       </ul>
 
       <ul class="ul-card-list">
-        <li v-for="(card, index) in decklist" class="card-holder">
+        <li v-for="card in decklist" :key="card.cardId" class="card-holder">
           <img :src="card.cardImg" @click="details(card)" 
-          @dbclick="removeFromDeck(index)"
+          @dblclick="removeFromDeck(decklist.indexOf(card))"
           class="single-card">
         </li>
       </ul>
