@@ -9,7 +9,7 @@ async function createSchema() {
     if (!exists) {
       await db.schema.createTable('cards', (table) => {
         table.increments('id').primary();
-        table.int('cardId').notNullable();
+        table.integer('cardId').notNullable();
         table.string('name').notNullable();
         table.string('image_url');
         table.float('cardmarket_price').defaultTo(0);
