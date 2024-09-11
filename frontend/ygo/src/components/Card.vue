@@ -14,7 +14,7 @@ export default {
       this.cardSearch(search);
     },
     async cardSearch(looking) {
-      const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php?&fname=${looking}`;
+      const url = `http://localhost:3000/api/cards/search?name=${looking}`;
       try {
         const response = await fetch(url);
         if(!response.ok) {
@@ -22,19 +22,18 @@ export default {
         }
 
         const json = await response.json();
-        const totalCards = json.data.length;
+        const totalCards = json.length;
         this.cardList = [];
 
         for(let x = 0; x < totalCards; x++) 
         {
-          const cardImg = json.data[x].card_images[0].image_url;
-          const cardId = json.data[x].id;
-
-          const cardMarketPrice = json.data[x].card_prices[0].cardmarket_price;
-          const tcgPlayerPrice = json.data[x].card_prices[0].tcgplayer_price;
-          const ebayPrice = json.data[x].card_prices[0].ebay_price;
-          const amazonPrice = json.data[x].card_prices[0].amazon_price;
-          const coolStuffIncPrice = json.data[x].card_prices[0].coolstuffinc_price;
+          const cardImg = json[x].image_url;
+          const cardId = json[x].cardId;
+          const cardMarketPrice = json[x].cardmarket_price;
+          const tcgPlayerPrice = json[x].tcgplayer_price;
+          const ebayPrice = json[x].ebay_price;
+          const amazonPrice = json[x].amazon_price;
+          const coolStuffIncPrice = json[x].coolstuffinc_price;
 
           this.cardList.push({
             cardImg, 
