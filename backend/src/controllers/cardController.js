@@ -17,7 +17,6 @@ async function searchCardsByName(req, res) {
     console.error('Error searching for cards: ', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
-  // res.send('hello MVC');
 }
 
 const home = (req, res) => {
