@@ -101,10 +101,6 @@ main {
   width: 300px;
 }
 
-.result-section {
-  /* margin: 0px; */
-}
-
 .result-section ul {
   list-style: none;
   display: flex;
@@ -113,21 +109,12 @@ main {
   padding: 10px;
 }
 
-.card-holder {
-  /* margin: 3px; */
-  height: 100px;
-  /* padding: 5px; */
-  /* background-color: red; */
-}
-
 .ul-card-list {
-  /* padding: 10px;  */
   overflow: auto;
-  height: 500px;
+  max-height: 500px;
   width: 100px;
   padding: 0;
   margin: 0;
-  /* background-color: yellow; */
 }
 
 .single-card {
