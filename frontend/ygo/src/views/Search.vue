@@ -45,7 +45,7 @@ export default {
 
 
 <template>
-  <h1>YU-GI-OH</h1>
+  <h1>Market Prices</h1>
   <main>
     <section class="single-card spacer">
       <div class="img-placeholder">
