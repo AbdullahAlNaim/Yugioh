@@ -67,6 +67,9 @@ export default {
         <li class="totals">
           <p><span>Cool Stuff Inc:</span> <span>$ {{ coolStuffIncPrice }}</span> </p>
         </li>
+        <li class="totals">
+          <p id="add-text">Double click from results to add to deck</p>
+        </li>
       </ul>
       
     </section>
@@ -147,4 +150,10 @@ h6 {
   height: 600px;
 }
 
+
+#add-text {
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 200;
+}
 </style>
