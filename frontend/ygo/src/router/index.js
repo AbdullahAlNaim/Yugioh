@@ -3,8 +3,6 @@ import.meta.env.BASE_UR
 
 import Search from '../views/Search.vue'
 import Home from '../views/Home.vue'
-import Account from '../views/Account.vue'
-import Deck from '../views/Decks.vue'
 
 const routes = [
   {
@@ -17,16 +15,6 @@ const routes = [
     name: 'Search',
     component: Search
   },
-  {
-    path: '/account',
-    name: 'Account',
-    component: Account
-  },
-  {
-    path: '/decks',
-    name: 'Decks',
-    component: Deck
-  }
 ]
 
 const router = createRouter({

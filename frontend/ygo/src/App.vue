@@ -4,11 +4,8 @@
 </template>
 
 <style scoped>
-* {
-  font-family: sans-serif;
-}
-
 h1 {
   margin: auto;
 }
+
 </style>

@@ -6,16 +6,18 @@
     <div>
       <ul class="nav-ul">
         <li class="nav-ul-li">
-          <router-link to="/">Home</router-link>
+            <router-link to="/">
+              <button class="search-page-btn">
+                Home
+              </button>
+            </router-link>
         </li>
         <li class="nav-ul-li">
-          <router-link to="/search">Search</router-link>
-        </li>
-        <li class="nav-ul-li">
-          <router-link to="decks">Decks</router-link>
-        </li>
-        <li class="nav-ul-li">
-          <router-link to="/account">Account</router-link>
+          <router-link to="/search">
+            <button class="search-page-btn">
+              Search
+            </button>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -26,7 +28,7 @@
 nav {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(83, 83, 83);
+  background-color: rgb(112, 45, 45);
 }
 
 h1 {
@@ -37,17 +39,12 @@ h1 {
   display: flex;
   width: 100%;
   list-style: none;
+  margin: 0;
 }
 
 .nav-ul-li {
   padding: 10px;
 }
 
-.nav-ul-li:hover {
-  background-color: white;
-}
 
-a {
-  text-decoration: none;
-}
 </style>

@@ -11,3 +11,21 @@ body {
   width: 100%;
   margin: 0;
 }
+
+.search-page-btn {
+  padding: 15px 35px 15px 35px;
+  border-radius: 10px;
+  border: 0px;
+  background-color: rgb(112, 45, 45);
+}
+
+.search-page-btn:hover {
+  background-color: white;
+  color: rgb(112, 45, 45);
+}
+
+
+a {
+  text-decoration: none;
+  color: white;
+}
