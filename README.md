@@ -1,7 +1,7 @@
 # Yugioh
 
 This app is to create a deck and see what the total pricing would be for the deck built. 
-It containts the price from 5 different markets using an api for all the data.
+It contains the price from 5 different markets using an api for all the data.
 
 ![ygo-landing](https://github.com/user-attachments/assets/38e06cf7-9370-4a40-adce-c8ad89c942d3)
 
